@@ -1,16 +1,9 @@
 const express = require("express");
-const Category = require("../models/Category");
 const router = express.Router({ mergeParams: true });
 
-router.get("/", async (req, res) => {
-  try {
-    const list = await Category.find();
-    res.status(200).send(list);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
-  }
-});
+const Controller = require("../controllers/category.controller");
+
+router.get("/", Controller.getList);
+router.get("/ids", Controller.getListByIds);
 
 module.exports = router;

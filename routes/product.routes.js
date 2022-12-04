@@ -1,16 +1,13 @@
 const express = require("express");
-const Product = require("../models/Product");
 const router = express.Router({ mergeParams: true });
 
-router.get("/", async (req, res) => {
-  try {
-    const list = await Product.find();
-    res.status(200).send(list);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
-  }
-});
+const Controller = require("../controllers/product.controller");
+
+router.get("/", Controller.getList);
+router.get("/:collectionPath", Controller.getListByCollection);
+router.get(
+  "/:collectionPath/:categoryPath",
+  Controller.getListByCollectionAndCategory
+);
 
 module.exports = router;
