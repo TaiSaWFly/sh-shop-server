@@ -12,12 +12,15 @@ exports.getList = async function (req, res) {
     const collections = await CollectionService.getListByIds(collectionIds);
 
     const data = transformMenuData(menus, collections, collectionCategories);
-    res.status(200).send(data);
+
+    res.status(200).json({
+      status: 200,
+      content: data,
+      message: "Succesfully Navigate Menus Retrieved",
+    });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "An error has occurred on the server. Try again later...",
-      });
+    res.status(500).json({
+      message: "An error has occurred on the server. Try again later...",
+    });
   }
 };

@@ -2,7 +2,7 @@ const CollectionCategory = require("../models/CollectionCategory");
 
 exports.getList = async function () {
   try {
-    const data = await CollectionCategory.find();
+    const data = await CollectionCategory.find().sort({ id: "asc" });
     return data;
   } catch (error) {
     throw Error("Unexpected error CollectionCategory");

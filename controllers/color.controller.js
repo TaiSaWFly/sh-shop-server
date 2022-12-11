@@ -2,7 +2,7 @@ const ColorService = require("../services/color.service");
 
 exports.getList = async function (req, res) {
   try {
-    console.log(req.query.id);
+    // console.log(req.query.id);
     if (req.query.id) {
       const data = await ColorService.getListByIds(req.query.id);
       res.status(200).send(data);

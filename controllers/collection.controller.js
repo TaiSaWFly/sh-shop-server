@@ -19,6 +19,7 @@ exports.getList = async function (req, res) {
 exports.getCollectionByPath = async function (req, res) {
   try {
     const { path } = req.params;
+
     const collection = await CollectionService.getCollectionByPath(path);
     const collectionCategory = await CollectionCategoryService.getListById(
       collection.id
@@ -41,7 +42,11 @@ exports.getCollectionByPath = async function (req, res) {
         products
       );
 
-      res.status(200).send(data);
+      res.status(200).json({
+        status: 200,
+        content: data,
+        message: "Succesfully Collection Retrieved",
+      });
     } else {
       const products = await ProductService.getListByCollectionId(
         collection.id
@@ -54,7 +59,11 @@ exports.getCollectionByPath = async function (req, res) {
         products: products,
       };
 
-      res.status(200).send(data);
+      res.status(200).json({
+        status: 200,
+        content: data,
+        message: "Succesfully Collection Retrieved",
+      });
     }
   } catch (error) {
     res

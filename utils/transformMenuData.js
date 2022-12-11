@@ -26,7 +26,7 @@ module.exports = (menus, collections, collCategories) => {
             collectionId: collections[c].id,
             name: collections[c].name,
             path: collections[c].path,
-            categories: null,
+            categories: [],
           });
         }
       }

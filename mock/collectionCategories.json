@@ -21,5 +21,10 @@
     "id": "collCategory_3",
     "collectionId": "collection_3",
     "categories": ["category_1", "category_5", "category_9", "category_8"]
+  },
+  {
+    "id": "collCategory_4",
+    "collectionId": "collection_4",
+    "categories": []
   }
 ]

@@ -5,7 +5,7 @@ const Category = require("../models/Category");
 const CollectionCategory = require("../models/CollectionCategory");
 const NavigateMenu = require("../models/NavigateMenu");
 
-const Product = require("../models/Product");
+// const Product = require("../models/Product");
 
 const colorsMock = require("../mock/colors.json");
 const sizesMock = require("../mock/sizes.json");
@@ -14,7 +14,7 @@ const categoriesMock = require("../mock/categories.json");
 const collectionCategoriesMock = require("../mock/collectionCategories.json");
 const navigateMenusMock = require("../mock/navigateMenus.json");
 
-const productsMock = require("../mock/products.json");
+// const productsMock = require("../mock/products.json");
 
 module.exports = async () => {
   await createInitialEntity(Color, colorsMock);
@@ -24,7 +24,7 @@ module.exports = async () => {
   await createInitialEntity(CollectionCategory, collectionCategoriesMock);
   await createInitialEntity(NavigateMenu, navigateMenusMock);
 
-  await createInitialEntity(Product, productsMock);
+  // await createInitialEntity(Product, productsMock);
 };
 
 async function createInitialEntity(Model, data) {
