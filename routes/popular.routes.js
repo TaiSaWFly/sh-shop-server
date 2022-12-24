@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 
-// const Controller = require("../controllers/size.controller");
+const Controller = require("../controllers/popular.controller");
 
-router.get("/");
+router.get("/", Controller.getList);
 
 module.exports = router;

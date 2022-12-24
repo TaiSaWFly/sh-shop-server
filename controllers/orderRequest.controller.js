@@ -1,12 +1,12 @@
-const ColorService = require("../services/color.service");
+const OrderRequestService = require("../services/orderRequest.service");
 
 exports.getList = async function (req, res) {
   try {
-    const data = await ColorService.getList();
+    const data = await OrderRequestService.getList();
     res.status(200).json({
       status: 200,
       content: data,
-      message: "Succesfully Color Retrieved",
+      message: "Succesfully OrderRequest Retrieved",
     });
   } catch (error) {
     res.status(500).json({
@@ -15,12 +15,14 @@ exports.getList = async function (req, res) {
   }
 };
 
-exports.getListByIds = async function (req, res) {
+exports.create = async function (req, res) {
   try {
-    const { id } = req.params;
+    await OrderRequestService.create(req.body);
 
-    const data = await ColorService.getListByIds(id);
-    res.status(200).send(data);
+    res.status(201).json({
+      status: 201,
+      message: "Succesfully OrderRequest Created",
+    });
   } catch (error) {
     res.status(500).json({
       message: "An error has occurred on the server. Try again later...",

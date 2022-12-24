@@ -4,8 +4,7 @@ const Collection = require("../models/Collection");
 const Category = require("../models/Category");
 const CollectionCategory = require("../models/CollectionCategory");
 const NavigateMenu = require("../models/NavigateMenu");
-
-// const Product = require("../models/Product");
+const Popular = require("../models/Popular");
 
 const colorsMock = require("../mock/colors.json");
 const sizesMock = require("../mock/sizes.json");
@@ -13,8 +12,7 @@ const collectionsMock = require("../mock/collections.json");
 const categoriesMock = require("../mock/categories.json");
 const collectionCategoriesMock = require("../mock/collectionCategories.json");
 const navigateMenusMock = require("../mock/navigateMenus.json");
-
-// const productsMock = require("../mock/products.json");
+const popularMock = require("../mock/populars.json");
 
 module.exports = async () => {
   await createInitialEntity(Color, colorsMock);
@@ -23,21 +21,56 @@ module.exports = async () => {
   await createInitialEntity(Category, categoriesMock);
   await createInitialEntity(CollectionCategory, collectionCategoriesMock);
   await createInitialEntity(NavigateMenu, navigateMenusMock);
-
-  // await createInitialEntity(Product, productsMock);
+  await createInitialEntity(Popular, popularMock);
 };
 
 async function createInitialEntity(Model, data) {
   await Model.collection.drop();
-  return Promise.all(
+  let responseData;
+  let bufferData = [];
+
+  Promise.all(
     data.map(async (item) => {
       try {
         const newItem = new Model(item);
-        await newItem.save();
-        return newItem;
+        bufferData.push(newItem);
       } catch (error) {
         return error;
       }
     })
   );
+
+  if (typeof bufferData[0]._id === "object") {
+    const newData = Promise.all(
+      bufferData.map(async (item) => {
+        try {
+          delete item._id;
+          const newItem = new Model(item);
+
+          await newItem.save();
+          return newItem;
+        } catch (error) {
+          return error;
+        }
+      })
+    );
+
+    responseData = newData;
+  } else if (typeof bufferData[0]._id === "string") {
+    const newData = Promise.all(
+      data.map(async (item) => {
+        try {
+          const newItem = new Model(item);
+          await newItem.save();
+          return newItem;
+        } catch (error) {
+          return error;
+        }
+      })
+    );
+
+    responseData = newData;
+  }
+
+  return responseData;
 }

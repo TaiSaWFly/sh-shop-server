@@ -1,7 +1,7 @@
 [
-  { "id": "size_1", "value": 38 },
-  { "id": "size_2", "value": 39 },
-  { "id": "size_3", "value": 40 },
-  { "id": "size_4", "value": 41 },
-  { "id": "size_5", "value": 42 }
+  { "_id": "size_1", "name": 38 },
+  { "_id": "size_2", "name": 39 },
+  { "_id": "size_3", "name": 40 },
+  { "_id": "size_4", "name": 41 },
+  { "_id": "size_5", "name": 42 }
 ]

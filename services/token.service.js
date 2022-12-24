@@ -24,13 +24,20 @@ exports.save = async function (user, refreshToken) {
   }
 
   const token = await Token.create({ user, refreshToken });
-
   return token;
 };
 
 exports.validateRefresh = function (refreshToken) {
   try {
     return jwt.verify(refreshToken, config.get("refreshSecret"));
+  } catch (error) {
+    return null;
+  }
+};
+
+exports.validateAccess = function (accessToken) {
+  try {
+    return jwt.verify(accessToken, config.get("accessSecret"));
   } catch (error) {
     return null;
   }

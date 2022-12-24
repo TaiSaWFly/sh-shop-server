@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const schema = new Schema(
   {
-    id: { type: String },
+    _id: { type: String },
     collectionId: {
       type: Schema.Types.String,
       ref: "Collection",

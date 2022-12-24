@@ -2,11 +2,9 @@ const Size = require("../models/Size");
 
 exports.getList = async function () {
   try {
-    const data = await Size.find();
+    const data = await Size.find().sort({ _id: "asc" });
     return data;
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
+    throw Error("Unexpected error Size");
   }
 };

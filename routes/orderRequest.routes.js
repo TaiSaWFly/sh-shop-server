@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 
-const Controller = require("../controllers/color.controller");
+const Controller = require("../controllers/orderRequest.controller");
 
 router.get("/", Controller.getList);
-router.get("/id", Controller.getListByIds);
+router.post("/", Controller.create);
 
 module.exports = router;

@@ -4,10 +4,16 @@ const router = express.Router({ mergeParams: true });
 const Controller = require("../controllers/product.controller");
 
 router.get("/", Controller.getList);
-router.post("/limit", Controller.getListLimitAndId);
-router.get("/:collectionPath", Controller.getListByCollection);
+router.get(
+  "/productLength",
+  Controller.getListProductLengthByCollectionAndCategory
+);
+router.get("/newArrivals", Controller.getListNewArrivals);
+
+router.post("/", Controller.getListByIds);
+router.post("/by/:collectionPath", Controller.getListByCollectionPath);
 router.post(
-  "/:collectionPath/:categoryPath",
+  "/by/:collectionPath/:categoryPath",
   Controller.getListByCollectionAndCategory
 );
 

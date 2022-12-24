@@ -10,9 +10,9 @@ exports.getList = async function (req, res) {
     const data = await CollectionService.getList();
     res.status(200).send(data);
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
+    res.status(500).json({
+      message: "An error has occurred on the server. Try again later...",
+    });
   }
 };
 
@@ -22,7 +22,7 @@ exports.getCollectionByPath = async function (req, res) {
 
     const collection = await CollectionService.getCollectionByPath(path);
     const collectionCategory = await CollectionCategoryService.getListById(
-      collection.id
+      collection._id
     );
 
     if (collectionCategory) {
@@ -32,7 +32,7 @@ exports.getCollectionByPath = async function (req, res) {
 
       const products =
         await ProductService.getTransformedListByCollectionAndCategories(
-          collection.id,
+          collection._id,
           collectionCategory.categories
         );
 
@@ -49,11 +49,11 @@ exports.getCollectionByPath = async function (req, res) {
       });
     } else {
       const products = await ProductService.getListByCollectionId(
-        collection.id
+        collection._id
       );
 
       const data = {
-        id: collection.id,
+        _id: collection._id,
         name: collection.name,
         path: collection.path,
         products: products,
@@ -66,8 +66,8 @@ exports.getCollectionByPath = async function (req, res) {
       });
     }
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
+    res.status(500).json({
+      message: "An error has occurred on the server. Try again later...",
+    });
   }
 };

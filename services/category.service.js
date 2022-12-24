@@ -11,7 +11,7 @@ exports.getList = async function () {
 
 exports.getListByIds = async function (ids) {
   try {
-    const data = await Category.find({ id: { $in: ids } });
+    const data = await Category.find({ _id: { $in: ids } });
     return data;
   } catch (error) {
     throw Error("Unexpected error Category");

@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const { validationResult } = require("express-validator");
+const { generateUserAvatar } = require("../utils/helpers/generateUserAvatar");
 
 const TokenService = require("../services/token.service");
 const UserService = require("../services/user.service");
@@ -36,6 +37,7 @@ exports.signup = async function (req, res) {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const newUser = await UserService.create({
+      ...generateUserAvatar(),
       ...req.body,
       password: hashedPassword,
     });
@@ -46,9 +48,9 @@ exports.signup = async function (req, res) {
 
     res.status(201).send({ ...tokens, userId: newUser._id });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
+    res.status(500).json({
+      message: "An error has occurred on the server. Try again later...",
+    });
   }
 };
 
@@ -96,9 +98,9 @@ exports.signinWithPassword = async function (req, res) {
 
     res.status(200).send({ ...tokens, userId: existingUser._id });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
+    res.status(500).json({
+      message: "An error has occurred on the server. Try again later...",
+    });
   }
 };
 
@@ -117,8 +119,8 @@ exports.token = async function (req, res) {
 
     res.status(200).send({ ...tokens, userId: data._id });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
+    res.status(500).json({
+      message: "An error has occurred on the server. Try again later...",
+    });
   }
 };

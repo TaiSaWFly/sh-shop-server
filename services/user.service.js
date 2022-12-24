@@ -9,6 +9,17 @@ exports.findOne = async function (param) {
   }
 };
 
+exports.update = async function (id, reqData) {
+  try {
+    const data = await User.findByIdAndUpdate(id, reqData, {
+      new: true,
+    });
+    return data;
+  } catch (error) {
+    throw Error("Unexpected error User");
+  }
+};
+
 exports.create = async function (data) {
   try {
     const newUser = await User.create(data);

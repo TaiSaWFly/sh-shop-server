@@ -3,9 +3,9 @@ module.exports = (collCategories, collections) => {
 
   for (const collCat in collCategories) {
     for (const c in collections) {
-      if (collCategories[collCat].collectionId === collections[c].id) {
+      if (collCategories[collCat].collectionId === collections[c]._id) {
         newData.push({
-          id: collections[c].id,
+          _id: collections[c]._id,
           name: collections[c].name,
           path: collections[c].path,
           categories: collCategories[collCat].categories,
